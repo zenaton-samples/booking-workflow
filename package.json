@@ -5,6 +5,10 @@
   "repository": "https://github.com/zenaton/zenaton-boilerplate.git",
   "license": "MIT",
   "dependencies": {
+    "@sendgrid/mail": "^6.5.1",
+    "@slack/web-api": "^5.7.0",
+    "axios": "^0.19.2",
+    "twilio": "^3.39.3",
     "zenaton": "^0.8.0"
   },
   "scripts": {

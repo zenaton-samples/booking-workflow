@@ -1,9 +1,12 @@
 // load dependencies
-const { workflow, task } = require('zenaton');
+const { workflow, task } = require("zenaton");
 
 // define tasks
-task("GetSentence", require("./tasks/getSentence"));
-task("LogSentence", require("./tasks/logSentence"));
+task("createBooking", require("./tasks/createBooking"));
+task("updateBooking", require("./tasks/updateBooking"));
 
+task("sendEmail", require("./tasks/sendEmail"));
+task("sendSlackMessage", require("./tasks/sendSlackMessage"));
+task("sendSMS", require("./tasks/sendSMS"));
 // define workflows
-workflow("HelloWorld", require("./workflows/helloWorld"));
+workflow("bookingWorkflow", require("./workflows/bookingWorkflow"));

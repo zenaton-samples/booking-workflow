@@ -1,6 +1,6 @@
-# Zenaton Project Boilerplate
+# Zenaton Booking workflow example
 
-This is an example of Zenaton project. It can be used as a starter to your own project. 
+This is an example of Zenaton project. It can be used as a starter to your own project.
 
 ## Development
 
@@ -10,37 +10,46 @@ The `boot.js` file is where you tell the Zenaton Agent where to find - by name -
 
 Look at Zenaton documentation to learn how to implement [workflows](https://docs.zenaton.com/workflows/implementation/) and [tasks](https://docs.zenaton.com/tasks/implementation/).
 
-## Run 
+## Run
 
 You can dispatch tasks and workflows by name from everywhere using [Zenaton API](https://docs.zenaton.com/client/graphql-api/). They will be processed as soon as you run this project.
 
 > Note: tasks and workflows are dispatched in an environment (`AppEnv`) of your Zenaton application (`AppId`). They will be processed by this project, **if** you setup it with the same `AppId` and `AppEnv`. You must also provide an `Api Token` to authorize access to this application (found at https://app.zenaton.com/api)
 
 ### Run Locally
+
 First, install dependencies:
+
 ```
 npm install
 ```
+
 then, fill-in `ZENATON_APP_ID` and `ZENATON_API_TOKEN` in the `.env` file.
 
 Install a Zenaton Agent:
-````sh
+
+```sh
 curl https://install.zenaton.com | sh
-````
+```
+
 and run it:
-````sh
+
+```sh
 zenaton listen --boot=boot.js
-````
+```
 
 ### Run in Docker
 
 Create your `.env` file
+
 ```
 cp -n .env.sample .env
 ```
+
 and fill-in `ZENATON_APP_ID` and `ZENATON_API_TOKEN` in it.
 
 Then start your container:
+
 ```
 cd docker && docker-compose up
 ```
@@ -54,23 +63,26 @@ Follow this button [![Deploy](https://www.herokucdn.com/deploy/button.svg)](http
 Check our [documentation](https://docs.zenaton.com/going-to-production/) for more options (AWS, Google Cloud, Clever Cloud ...)
 
 ### Checking that your project is running
+
 Whatever your installation method, you should see that a new Agent is listening from this url: https://app.zenaton.com/agents (if you do not see it, please check again that you have selected the right application and environment).
 
 ## Dispatching Tasks and Workflows
 
-Tasks and workflows can be dispatched  by name from everywhere using the [Zenaton API](https://docs.zenaton.com/client/graphql-api/) or our [Node.js SDK](https://github.com/zenaton/zenaton-node).
+Tasks and workflows can be dispatched by name from everywhere using the [Zenaton API](https://docs.zenaton.com/client/graphql-api/) or our [Node.js SDK](https://github.com/zenaton/zenaton-node).
 
 You can use also the UI of our [example app](https://github.com/zenaton/nodejs-example-app). After installation, you can (optionaly) add your workflows and some examples of input and event in the `public/config.json` file. eg.
-````json
+
+```json
 {
   "workflows": [
     {
       "name": "HelloWorld",
-      "input": [ "Me" ],
+      "input": ["Me"]
     }
   ]
-} 
-````
+}
+```
+
 > You need to rebuild your example app after having modified this file. If you prefer, you can update directly `dist/config.json` and simply reload the page - but your changes will be lost at the next rebuild.
 
 ## Monitoring Tasks and Worklows Processing
