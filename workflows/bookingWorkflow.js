@@ -1,6 +1,6 @@
 const { duration } = require("zenaton");
 
-/* Workflow for an event-booking marketplace with notifications to user, owner's place and customer success team  */
+/* Workflow for an event-booking marketplace with notifications to user, location owner and customer success team  */
 module.exports.handle = function*(booking) {
   this.run.task("sendEmail", booking.owner.email, "REQUEST_TO_OWNER");
 
