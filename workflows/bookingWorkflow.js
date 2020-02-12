@@ -1,6 +1,6 @@
 const { duration } = require("zenaton");
 
-/* Workflow for booking validation with notifications to user, owner's place and customer success team  */
+/* Workflow for an event-booking marketplace with notifications to user, owner's place and customer success team  */
 module.exports.handle = function*(booking) {
   this.run.task("sendEmail", booking.owner.email, "REQUEST_TO_OWNER");
 
@@ -23,8 +23,8 @@ module.exports.handle = function*(booking) {
       this.run.task("sendEmail", booking.user.email, "OWNER_CANCELLATION");
     }
   } else {
-    // if the owner doesn't replied
-    // send him an SMS reminder
+    // if the owner doesn't reply
+    // send an SMS reminder
     this.run.task("sendSMS", booking.owner.phone, "OWNER_REMINDER");
 
     this.run.task(
@@ -32,11 +32,11 @@ module.exports.handle = function*(booking) {
       `#${booking.id} is waiting for the owner's reply...`
     );
 
-    // stops the workflow execution
+    // stop the workflow execution
     return;
   }
 
-  // if the restaurant asked for a deposit
+  // if the restaurant requires a deposit
   if (booking.deposit) {
     // send a deposit request email to the user
     this.run.task(
@@ -52,8 +52,8 @@ module.exports.handle = function*(booking) {
       `#${booking.id} waiting for user deposit...`
     );
   } else {
-    // if the restaurant did not ask for a deposit
-    // notify the user about the confirmation by SMS and email
+    // if the restaurant did not require a deposit
+    // notify the user via confirmation SMS and email
     this.run.task("sendSMS", booking.owner.user, "USER_REMINDER");
 
     this.run.task("sendEmail", booking.user.email, "BOOKING_CONFIRMATION");
